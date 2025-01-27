@@ -1474,12 +1474,12 @@ h3 {
 
 /* line 1, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_slider.scss */
 .slider_bg_1 {
-  background-image: url(../img/banner/banner.png);
+  background-image: url(../img/iya/IMG-20250123-WA0039.jpg);
 }
 
 /* line 4, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_slider.scss */
 .slider_bg_2 {
-  background-image: url(https://themewagon.github.io/charifit/img/banner/banner2.png);
+  background-image: url(../img/iya/IMG-20250123-WA0032.jpg);
 }
 
 /* line 8, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_slider.scss */
@@ -2959,23 +2959,24 @@ h3 {
 
 /* line 1, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_latest_activites.scss */
 .video_bg_1 {
-  background-image: url(../img/banner/man.png);
+  background-image: url(../img/iya/profiles/Picture2.jpg);
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: top center;
   background-size: cover;
 }
 
 /* line 7, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_latest_activites.scss */
 .latest_activites_area {
-  background: rgba(60, 199, 143, 0.06);
+  background: rgba(108, 169, 146, 0.2);
   position: relative;
+  padding-left: 20px;
 }
 
 /* line 10, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_latest_activites.scss */
 .latest_activites_area .video_activite {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 30px;
   width: 40%;
   bottom: 0;
 }
@@ -3024,9 +3025,9 @@ h3 {
 
 /* line 45, ../../Arafath/CL/january 2020/242. charity/HTML/scss/_latest_activites.scss */
 .latest_activites_area .activites_info {
-  padding-right: 156px;
-  padding-top: 240px;
-  padding-bottom: 226px;
+  padding-right: 10px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 @media (max-width: 767px) {
