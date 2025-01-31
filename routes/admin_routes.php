@@ -1,7 +1,7 @@
 <?php
 
 $router->addRoute('GET', '/admin/login', function () {
-    require __DIR__ . '/views/admin/login.php';
+    require __DIR__ . '/../views/admin/login.php';
     exit;
 });
 
@@ -13,7 +13,7 @@ $router->addRoute('POST', '/admin/login', function () {
         header("Location: /admin/login");
     }
 
-    require(__DIR__."/include/config.php");
+    require(__DIR__."/../include/config.php");
 
     if ($stmt = $con->prepare('SELECT id, name, email, phone, password FROM users WHERE username = ?')) {
         // Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
@@ -65,7 +65,7 @@ $router->addRoute('GET', '/admin/register/user', function () {
         exit;
     }
 
-    require __DIR__ . '/views/admin/register.php';
+    require __DIR__ . '/../views/admin/register.php';
     exit;
 });
 
@@ -77,7 +77,7 @@ $router->addRoute('POST', '/admin/register/user', function () {
         exit;
     }
 
-    require(__DIR__."/include/config.php");
+    require(__DIR__."/../include/config.php");
 
     
     if (empty($_REQUEST['name']) || empty($_REQUEST['username']) || empty($_REQUEST['email']) || empty($_REQUEST['phone']) || empty($_REQUEST['password'])) {
@@ -129,7 +129,7 @@ $router->addRoute('GET', '/admin', function () {
         exit;
     }
 
-    require(__DIR__."/include/config.php");
+    require(__DIR__."/../include/config.php");
 
     // news
     $query    = "SELECT * FROM `news`";
@@ -149,7 +149,7 @@ $router->addRoute('GET', '/admin', function () {
     $galleries = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
-    require __DIR__ . '/views/admin/index.php';
+    require __DIR__ . '/../views/admin/index.php';
     exit;
 });
 
@@ -175,7 +175,7 @@ $router->addRoute('GET', '/admin/news', function () {
         exit;
     }
 
-    require(__DIR__."/include/config.php");
+    require(__DIR__."/../include/config.php");
 
     $query    = "SELECT * FROM `news` ORDER BY date DESC";
     
@@ -183,7 +183,7 @@ $router->addRoute('GET', '/admin/news', function () {
 
     $news = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    require __DIR__ . '/views/admin/news.php';
+    require __DIR__ . '/../views/admin/news.php';
     exit;
 });
 
@@ -194,7 +194,7 @@ $router->addRoute('GET', '/admin/news/edit/:id', function ($id) {
         exit;
     }
 
-    require(__DIR__."/include/config.php");
+    require(__DIR__."/../include/config.php");
 
     $query    = "SELECT * FROM `news` WHERE id='$id'";
     
@@ -204,7 +204,7 @@ $router->addRoute('GET', '/admin/news/edit/:id', function ($id) {
 
     if ($rows == 1) {
         $news = mysqli_fetch_assoc($result);
-        require __DIR__ . '/views/admin/single_news.php';
+        require __DIR__ . '/../views/admin/single_news.php';
         exit;
     }else{
         require __DIR__ . '/views/404.php';
@@ -219,7 +219,7 @@ $router->addRoute('GET', '/admin/news/add', function () {
         exit;
     }
 
-    require __DIR__ . '/views/admin/add_news.php';
+    require __DIR__ . '/../views/admin/add_news.php';
     exit;
 });
 
@@ -229,7 +229,7 @@ $router->addRoute('GET', '/admin/news/delete/:id', function ($id) {
         exit;
     }
 
-    require(__DIR__."/include/config.php");
+    require(__DIR__."/../include/config.php");
 
     $query = "DELETE FROM `news` WHERE id='$id'";
     
@@ -245,7 +245,6 @@ $router->addRoute('GET', '/admin/news/delete/:id', function ($id) {
 });
 
 
-
 // list galleries
 $router->addRoute('GET', '/admin/galleries', function () {
     if (!isset($_SESSION['loggedin'])) {
@@ -253,7 +252,7 @@ $router->addRoute('GET', '/admin/galleries', function () {
         exit;
     }
 
-    require(__DIR__."/include/config.php");
+    require(__DIR__."/../include/config.php");
 
     $query    = "SELECT * FROM `galleries` ORDER BY created_at DESC";
     
@@ -261,7 +260,7 @@ $router->addRoute('GET', '/admin/galleries', function () {
 
     $galleries = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    require __DIR__ . '/views/admin/galleries.php';
+    require __DIR__ . '/../views/admin/galleries.php';
     exit;
 });
 
@@ -272,7 +271,7 @@ $router->addRoute('GET', '/admin/galleries/add', function () {
         exit;
     }
 
-    require __DIR__ . '/views/admin/add_galleries.php';
+    require __DIR__ . '/../views/admin/add_galleries.php';
     exit;
 });
 
@@ -282,7 +281,7 @@ $router->addRoute('GET', '/admin/galleries/delete/:id', function ($id) {
         exit;
     }
 
-    require(__DIR__."/include/config.php");
+    require(__DIR__."/../include/config.php");
 
     $query = "DELETE FROM `galleries` WHERE id='$id'";
     
@@ -297,6 +296,57 @@ $router->addRoute('GET', '/admin/galleries/delete/:id', function ($id) {
     }
 });
 
+
+// list videos
+$router->addRoute('GET', '/admin/videos', function () {
+    if (!isset($_SESSION['loggedin'])) {
+        header('Location: /admin/login');
+        exit;
+    }
+
+    require(__DIR__."/../include/config.php");
+
+    $query    = "SELECT * FROM `videos` ORDER BY created_at DESC";
+    
+    $result = mysqli_query($con, $query);
+
+    $videos = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    require __DIR__ . '/../views/admin/videos.php';
+    exit;
+});
+
+// show add gallery
+$router->addRoute('GET', '/admin/videos/add', function () {
+    if (!isset($_SESSION['loggedin'])) {
+        header('Location: /admin/login');
+        exit;
+    }
+
+    require __DIR__ . '/../views/admin/add_videos.php';
+    exit;
+});
+
+$router->addRoute('GET', '/admin/videos/delete/:id', function ($id) {
+    if (!isset($_SESSION['loggedin'])) {
+        header('Location: /admin/login');
+        exit;
+    }
+
+    require(__DIR__."/../include/config.php");
+
+    $query = "DELETE FROM `videos` WHERE id='$id'";
+    
+    $result = mysqli_query($con, $query);
+
+    if ($result) {
+        $_SESSION["message"] = "One Video is deleted! Thank you.";
+        header("Location: /admin/videos");
+    } else {
+        $_SESSION["message"] = "Failed!!! Try Again.";
+        header("Location: /admin/videos");
+    }
+});
 
 // end of admin routes
 
